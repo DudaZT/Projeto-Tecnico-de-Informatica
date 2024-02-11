@@ -1,0 +1,55 @@
+Criação da Tabela Jogadores:
+
+CREATE TABLE `jogadores` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `NomeCompleto` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `DataNascimento` date NOT NULL,
+  `Telefone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Pais` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Estado` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Cidade` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Endereco` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Senha` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Sexo` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `DesejaCompetir` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `DesejaFormarEquipes` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `HorariosDisponiveis` text COLLATE utf8mb4_unicode_ci,
+  `Necessidade` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `CondicoesSaude` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `Email_UNIQUE` (`Email`)
+)
+
+Inserção na Tabela Jogadores:
+
+INSERT INTO `jogadores` VALUES (2,'Gabriel França','2002-09-13','165328732','gabriel@gmail.com','Brasil','São Paulo','Araraquara','av.dona josephina, 301','Gabriel@1','Masculino','Sim','Sim','Sabado: Matutino, Vespertino, Noturno, Domingo: Matutino, Vespertino, Noturno','Não','Oculos'),(4,'Maria Eduarda','2001-09-02','12991191120','maria@gmail.com','Brasil','SP','SP','Rua Amélia','123','Feminino','Sim','Sim','Segunda: Matutino','Não','Fumante');
+
+Criação da Tabela Esportes e Jogos Eletrônicos:
+
+CREATE TABLE `esportesjogoseletronicos` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `Nome` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Modalidade` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Eletronico` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`ID`)
+)
+
+Inserção na Tabela Esportes e Jogos Eletrônicos:
+
+INSERT INTO `esportesjogoseletronicos` VALUES (1,'Atletismo','Individual','Não'),(2,'Natação','Individual','Não'),(3,'Xadrez','Individual','Não'),(4,'Tênis de Mesa','Individual','Não'),(5,'Judô','Individual','Não'),(6,'Basquete','Coletiva','Não'),(7,'Futebol','Coletiva','Não'),(8,'Futsal','Coletiva','Não'),(9,'Handebol','Coletiva','Não'),(10,'Vôlei','Coletiva','Não'),(11,'Vôlei de Praia','Coletiva','Não'),(12,'League of Legends','Coletiva','Sim'),(13,'Xadrez Arena','Individual','Sim'),(14,'Free Fire','Coletiva','Sim');
+
+Criação da Tabela Interesses:
+
+CREATE TABLE `interesses` (
+  `JogadorID` int DEFAULT NULL,
+  `EsporteJogoID` int DEFAULT NULL,
+  KEY `JogadorID` (`JogadorID`),
+  KEY `EsporteJogoID` (`EsporteJogoID`),
+  CONSTRAINT `interesses_ibfk_1` FOREIGN KEY (`JogadorID`) REFERENCES `jogadores` (`ID`) ON DELETE CASCADE,
+  CONSTRAINT `interesses_ibfk_2` FOREIGN KEY (`EsporteJogoID`) REFERENCES `esportesjogoseletronicos` (`ID`)
+)
+
+Inserção na Tabela Interesses:
+
+INSERT INTO `interesses` VALUES (4,14),(4,13),(2,12),(2,13);
